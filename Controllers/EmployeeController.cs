@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using middleware.Models;
 
 namespace middleware.Controllers
 {
@@ -7,19 +7,25 @@ namespace middleware.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private readonly IConfiguration configuration;
+
+        public EmployeeController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
 
         [HttpGet]
         public IActionResult Get()
         {
 
-            var employee
+            var response
                  = new
                  {
-                     FirstName = "Rahul",
-                     LastName = "Pandey"
+                     ProductApiKey = configuration.GetSection("ApiKeys:ProductApiKey").Value,
+                     CustomerApiKey = configuration.GetSection("ApiKeys:CustomerApiKey").Value,
                  };
 
-            return Ok(employee);
+            return Ok(response);
         }
     }
 }

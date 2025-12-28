@@ -4,13 +4,15 @@
     {
         private readonly RequestDelegate next;
 
-        public HeaderCheckMiddleware(RequestDelegate next)
+        public HeaderCheckMiddleware(
+            RequestDelegate next)
         {
             this.next = next;
         }
 
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(
+            HttpContext context)
         {
 
             if(!context.Request.Headers.TryGetValue("x-api-header",out var value))

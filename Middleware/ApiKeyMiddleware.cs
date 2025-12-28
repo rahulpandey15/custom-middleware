@@ -8,7 +8,8 @@ namespace middleware.Middleware
         private readonly RequestDelegate next;
         private readonly IConfiguration configuration;
 
-        public ApiKeyMiddleware(RequestDelegate next,
+        public ApiKeyMiddleware(
+            RequestDelegate next,
             IConfiguration configuration)
         {
             this.next = next;
